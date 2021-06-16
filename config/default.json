@@ -1,0 +1,5 @@
+{
+    "port": 5000,
+    "mongo_url": "mongodb+srv://dmitry:dmitry.y9@cluster0.pfzzu.mongodb.net/mern?retryWrites=true&w=majority",
+    "jwtSecret": "dmitry.y MERN example"
+}
