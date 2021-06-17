@@ -72,14 +72,14 @@ router.post(
       }
 
       const { email, password } = req.body;
-      const user = User.findOne({ email });
+      const user = await User.findOne({ email });
       if (!user) {
         return res.status(400).json({
           message: "User is not found",
         });
       }
 
-      const isMatch = bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         return res.status(401).json({
           message: "Password is not correct",
@@ -87,8 +87,9 @@ router.post(
       }
 
       // create jwt token
+      // https://www.npmjs.com/package/jsonwebtoken
       const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-        expiresIn: "1h",
+        expiresIn: "1m",
       });
 
       res.status(200).json({
