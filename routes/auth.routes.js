@@ -89,7 +89,7 @@ router.post(
       // create jwt token
       // https://www.npmjs.com/package/jsonwebtoken
       const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-        expiresIn: "1m",
+        expiresIn: "1h",
       });
 
       res.status(200).json({
@@ -97,6 +97,55 @@ router.post(
         userId: user.id,
       });
     } catch (e) {
+      res.status(500).json({
+        message: "Something was wrong: " + e.message,
+      });
+    }
+  }
+);
+
+// /api/auth/token
+// validate token
+router.post(
+  "/token",
+  // middleware to validate user data
+  [
+    check("userId", "UserId is not exist").exists(),
+    check("token", "Token is not exist").exists(),
+  ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Token is not exist",
+        });
+      }
+
+      const { userId, token } = req.body;
+      let decodedToken;
+      try {
+        // https://www.npmjs.com/package/jsonwebtoken
+        decodedToken = jwt.verify(token, config.get("jwtSecret"));
+      } catch (e) {
+        return res.status(401).json({
+          message: "Token is invalid: " + e.message,
+        });
+      }
+
+      if (decodedToken.userId !== userId) {
+        return res.status(401).json({
+          message: "Token is provided for wrong user",
+        });
+      }
+
+      res.status(200).json({
+        token,
+        userId,
+      });
+    } catch (e) {
+      console.log("Something was wrong: ", e);
       res.status(500).json({
         message: "Something was wrong: " + e.message,
       });

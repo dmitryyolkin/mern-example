@@ -44,6 +44,13 @@ export const AuthPage = () => {
     } catch (e) {}
   };
 
+  const keyPressHandler = async (event) => {
+    if (event.key === "Enter") {
+      // login
+      await loginHandler();
+    }
+  };
+
   return (
     <div className="row">
       <div className="col s6 offset-s4">
@@ -77,6 +84,7 @@ export const AuthPage = () => {
                       name="password"
                       className="yellow-input"
                       onChange={changeHandler}
+                      onKeyPress={keyPressHandler}
                     />
                     <label htmlFor="password">Password</label>
                   </div>

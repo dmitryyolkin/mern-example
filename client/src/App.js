@@ -1,9 +1,8 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { useRoutes } from "./routes";
 import { useAuth } from "./hooks/auth.hook";
-
-import "materialize-css";
 import { AuthContext } from "./context/auth.context";
+import "materialize-css";
 
 function App() {
   const { login, logout, userId, token } = useAuth();
