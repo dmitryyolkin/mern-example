@@ -1,6 +1,12 @@
 /* add min version of materialize */
 @import "~materialize-css/dist/css/materialize.min.css";
 
+/* to show loader by center*/
+html, body, .loading-wrapper {
+    min-height: 100vh;
+    padding: 0;
+}
+
 /* Auth page styles */
 .mr10 {
     margin-right: 10px;

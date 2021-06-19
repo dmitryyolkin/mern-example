@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHttp } from "../hooks/http.hook";
 import { useMessage } from "../hooks/message.hook";
 import { AuthContext } from "../context/auth.context";
+import { Loading } from "../components/Loading";
 
 import "materialize-css";
 
@@ -51,6 +52,19 @@ export const AuthPage = () => {
     }
   };
 
+  if (!auth.tokenVerified) {
+    // show Loader until token is verified
+    return (
+      <div className="loading-wrapper valign-wrapper center-align">
+        <div className="row">
+          <div className="col s6 offset-s6">
+            <Loading />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="row">
       <div className="col s6 offset-s4">
@@ -73,7 +87,9 @@ export const AuthPage = () => {
                       className="yellow-input"
                       onChange={changeHandler}
                     />
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email" className="active">
+                      Email
+                    </label>
                   </div>
                   <div className="input-field">
                     <i className="material-icons prefix">lock_outline</i>
@@ -86,7 +102,9 @@ export const AuthPage = () => {
                       onChange={changeHandler}
                       onKeyPress={keyPressHandler}
                     />
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password" className="active">
+                      Password
+                    </label>
                   </div>
                 </div>
               </div>

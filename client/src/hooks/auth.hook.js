@@ -7,6 +7,7 @@ export const useAuth = () => {
   // based on jwt token
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [tokenVerified, setTokenVerified] = useState(false);
 
   const { request } = useHttp();
 
@@ -30,7 +31,7 @@ export const useAuth = () => {
     localStorage.removeItem(storageName);
   }, []);
 
-  const validateToken = useCallback(async () => {
+  const verifyToken = useCallback(async () => {
     let data = JSON.parse(localStorage.getItem(storageName));
     if (data && data.token) {
       try {
@@ -47,16 +48,18 @@ export const useAuth = () => {
       }
     } else {
       console.log("no token");
-      logout();
     }
+
+    setTokenVerified(true);
   }, [request, login, logout]);
 
   // get user data from local storage on loading
   useEffect(() => {
-    validateToken().catch((err) => {
+    verifyToken().catch((err) => {
       console.log("Error on validate token: ", err);
+      throw err;
     });
-  }, [validateToken]);
+  }, [verifyToken]);
 
-  return { login, logout, userId, token };
+  return { login, logout, userId, token, tokenVerified };
 };
