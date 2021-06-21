@@ -46,3 +46,8 @@ input.yellow-input:focus + .prefix.active {
 .navbar-links {
     padding: 0 2rem;
 }
+
+/* Create Link */
+.create-link-pd-top {
+    padding-top: 2rem;
+}

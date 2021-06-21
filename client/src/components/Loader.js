@@ -1,7 +1,7 @@
 import React from "react";
 import "materialize-css";
 
-export const Loading = () => {
+export const Loader = () => {
   return (
     <div className="preloader-wrapper big active">
       <div className="spinner-layer spinner-blue-only">
