@@ -42,3 +42,7 @@ input.yellow-input:focus + .prefix.active {
     color: #ffeb3b!important;
 }
 
+/* NavBar */
+.navbar-links {
+    padding: 0 2rem;
+}
