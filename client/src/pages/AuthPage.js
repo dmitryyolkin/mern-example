@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHttp } from "../hooks/http.hook";
 import { useMessage } from "../hooks/message.hook";
 import { AuthContext } from "../context/auth.context";
-import { Loading } from "../components/Loading";
 
 import "materialize-css";
 
@@ -51,19 +50,6 @@ export const AuthPage = () => {
       await loginHandler();
     }
   };
-
-  if (!auth.tokenVerified) {
-    // show Loader until token is verified
-    return (
-      <div className="loading-wrapper valign-wrapper center-align">
-        <div className="row">
-          <div className="col s6 offset-s6">
-            <Loading />
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="row">
