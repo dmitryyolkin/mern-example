@@ -13,15 +13,7 @@ function App() {
 
   if (!ready) {
     // show Loader until token is verified
-    return (
-      <div className="loading-wrapper valign-wrapper center-align">
-        <div className="row">
-          <div className="col s6 offset-s6">
-            <Loader />
-          </div>
-        </div>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (
