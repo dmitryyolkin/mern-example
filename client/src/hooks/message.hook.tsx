@@ -2,10 +2,11 @@ import { useCallback } from "react";
 
 export const useMessage = () => {
   return useCallback((text) => {
-    if (window.M && text) {
+    let _window = window as any;
+    if (_window.M && text) {
       // send alert
       // https://materializecss.com/toasts.html
-      window.M.toast({ html: text });
+      _window.M.toast({ html: text });
     }
   }, []);
 };

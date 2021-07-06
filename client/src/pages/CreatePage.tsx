@@ -3,13 +3,13 @@ import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/auth.context";
 import { useHistory } from "react-router-dom";
 
-export const CreatePage = () => {
-  const [link, setLink] = useState("");
+export const CreatePage: React.FC = () => {
+  const [link, setLink] = useState<string>("");
   const history = useHistory();
   const auth = useContext(AuthContext);
   const { request } = useHttp();
 
-  const pressHandler = async (event) => {
+  const pressHandler = async (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       try {
         const data = await request(

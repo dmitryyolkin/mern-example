@@ -4,12 +4,13 @@ import { useMessage } from "../hooks/message.hook";
 import { AuthContext } from "../context/auth.context";
 
 import "materialize-css";
+import { IForm } from "../interfaces";
 
-export const AuthPage = () => {
+export const AuthPage: React.FC = () => {
   const auth = useContext(AuthContext);
   const message = useMessage();
   const { loading, error, request, clearError } = useHttp();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<IForm>({
     email: "",
     password: "",
   });
@@ -19,7 +20,7 @@ export const AuthPage = () => {
     clearError();
   }, [error, message, clearError]);
 
-  const changeHandler = (event) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [event.target.name]: event.target.value,
@@ -44,7 +45,7 @@ export const AuthPage = () => {
     } catch (e) {}
   };
 
-  const keyPressHandler = async (event) => {
+  const keyPressHandler = async (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
       // login
       await loginHandler();

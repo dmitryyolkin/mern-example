@@ -3,9 +3,10 @@ import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/auth.context";
 import { Loader } from "../components/Loader";
 import { LinksList } from "../components/LinksList";
+import { ILink } from "../interfaces";
 
-export const LinksPage = () => {
-  const [links, setLinks] = useState([]);
+export const LinksPage: React.FC = () => {
+  const [links, setLinks] = useState<ILink[]>([]);
   const { loading, request } = useHttp();
   const { token } = useContext(AuthContext);
 

@@ -4,14 +4,19 @@ import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/auth.context";
 import { Loader } from "../components/Loader";
 import { LinkCard } from "../components/LinkCard";
+import { ILink } from "../interfaces";
 
-export const DetailPage = () => {
-  const [link, setLink] = useState(null);
+interface ParamTypes {
+  id: string;
+}
+
+export const DetailPage: React.FC = () => {
+  const [link, setLink] = useState<ILink | null>(null);
   const { token } = useContext(AuthContext);
   const { request, loading } = useHttp();
   // get param id from http params request
-  // id name is taken from routes.js -> <Route path="/detail/:id">
-  const linkId = useParams().id;
+  // id name is taken from routes.tsx -> <Route path="/detail/:id">
+  const linkId = useParams<ParamTypes>().id;
 
   const getLink = useCallback(async () => {
     try {
