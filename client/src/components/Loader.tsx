@@ -1,7 +1,7 @@
 import React from "react";
 import "materialize-css";
 
-export const Loader = () => {
+export const Loader: React.FC = () => {
   return (
     <div className="loading-wrapper valign-wrapper center-align">
       <div className="row">

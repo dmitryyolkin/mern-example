@@ -1,5 +1,11 @@
 import React from "react";
-export const LinkCard = ({ link }) => {
+import { ILink } from "../interfaces";
+
+export type LinkProps = {
+  link: ILink;
+};
+
+export const LinkCard: React.FC<LinkProps> = ({ link }) => {
   return (
     <>
       <h2>Link</h2>

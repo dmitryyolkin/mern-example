@@ -5,19 +5,13 @@ import { CreatePage } from "./pages/CreatePage";
 import { DetailPage } from "./pages/DetailPage";
 import { AuthPage } from "./pages/AuthPage";
 
-export const useRoutes = (isAuthenticated) => {
+export const useRoutes: React.FC<Boolean> = (isAuthenticated) => {
   if (isAuthenticated) {
     return (
       <Switch>
-        <Route path="/links" exact>
-          <LinksPage />
-        </Route>
-        <Route path="/create" exact>
-          <CreatePage />
-        </Route>
-        <Route path="/detail/:id">
-          <DetailPage />
-        </Route>
+        <Route component={LinksPage} path="/links" exact />
+        <Route component={CreatePage} path="/create" exact />
+        <Route component={DetailPage} path="/detail/:id" />
         <Redirect to="/create" />
       </Switch>
     );
@@ -25,9 +19,7 @@ export const useRoutes = (isAuthenticated) => {
 
   return (
     <Switch>
-      <Route path="/" exact>
-        <AuthPage />
-      </Route>
+      <Route component={AuthPage} path="/" exact />
       <Redirect to="/" />
     </Switch>
   );

@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
   const auth = useContext(AuthContext);
   const history = useHistory();
-  const logoutHandler = (event) => {
+  const logoutHandler = (event: React.MouseEvent) => {
     event.preventDefault(); // prevent a default behaviour
     auth.logout();
     history.push("/");

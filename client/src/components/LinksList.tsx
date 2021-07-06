@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ILink } from "../interfaces";
 
-export const LinksList = ({ links }) => {
+type LinksProps = {
+  links: ILink[];
+};
+
+export const LinksList: React.FC<LinksProps> = ({ links }) => {
   if (!links.length) {
     return <p className="center">No links!</p>;
   }
