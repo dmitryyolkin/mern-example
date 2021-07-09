@@ -1,9 +1,9 @@
-const { Schema, model, Types } = require("mongoose");
+import { Schema, model, Types } from "mongoose";
 
-const schema = new Schema({
+const schema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   links: [{ type: Types.ObjectId, ref: "Link" }],
 });
 
-module.exports = model("User", schema);
+export const User = model("User", schema);

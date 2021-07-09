@@ -1,6 +1,6 @@
-const { Schema, model, Types } = require("mongoose");
+import { Schema, model, Types, Model } from "mongoose";
 
-const schema = new Schema({
+const schema: Schema = new Schema({
   from: { type: String, required: true },
   to: { type: String, required: true, unique: true },
   code: { type: String, required: true, unique: true },
@@ -9,4 +9,4 @@ const schema = new Schema({
   owner: { type: Types.ObjectId, ref: "User" },
 });
 
-module.exports = model("Link", schema);
+export const Link = model("Link", schema);

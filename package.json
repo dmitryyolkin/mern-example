@@ -2,14 +2,17 @@
   "name": "mern-example",
   "version": "1.0.0",
   "description": "Mern stack",
-  "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app.js",
-    "server": "nodemon app.js",
+    "prod": "cross-env NODE_ENV=production npm run prod --prefix server",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\"",
+
+    "server": "npm run start --prefix server",
+    "server:install": "npm install --prefix server",
+    "server:build": "npm run build --prefix server",
+
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
-    "client:build": "npm run build --prefix client",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+    "client:build": "npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -25,18 +28,8 @@
     "url": "https://github.com/dmitryyolkin/mern-example/issues"
   },
   "homepage": "https://github.com/dmitryyolkin/mern-example#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.6",
-    "express": "^4.17.1",
-    "express-validator": "^6.12.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.13",
-    "shortid": "^2.2.16"
-  },
   "devDependencies": {
     "concurrently": "^6.2.0",
-    "cross-env": "^7.0.3",
-    "nodemon": "^2.0.7"
+    "cross-env": "^7.0.3"
   }
 }

@@ -30,7 +30,8 @@ export const useAuth = () => {
 
   // get user data from local storage on loading
   useEffect(() => {
-    let data = JSON.parse(localStorage.getItem(storageName) || "");
+    const storageData = localStorage.getItem(storageName) || "";
+    let data = !storageData || JSON.parse(storageData);
     if (data && data.token) {
       login(data.token, data.userId);
     }

@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const bcrypt = require("bcryptjs");
-const { check, validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const User = require("../models/User");
+import { Router, Request, Response } from "express";
+import bcrypt from "bcryptjs";
+import { check, validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+import config from "config";
+import { User } from "../models/User";
 
 const router = Router();
 
@@ -17,7 +17,7 @@ router.post(
       min: 6,
     }),
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -61,7 +61,7 @@ router.post(
     check("email", "Please input correct email").normalizeEmail().isEmail(),
     check("password", "Please input password").exists(),
   ],
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {

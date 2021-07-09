@@ -16,6 +16,7 @@ RUN npm install
 
 # Bundle app source code
 COPY --chown=node . .
-RUN npm run client:build
+RUN npm run server:build && \
+    npm run client:build
 
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "prod" ]
