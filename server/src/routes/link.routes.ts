@@ -1,11 +1,13 @@
-const { Router } = require("express");
-const config = require("config");
-const Link = require("../models/Link");
-const auth = require("../middleware/auth.middleware");
-const shortid = require("shortid");
+import { Router, Request, Response } from "express";
+import { RequestWithJwtUser } from "../interfaces";
+import config from "config";
+import { Link } from "../models/Link";
+import { auth } from "../middleware/auth.middleware";
+import shortid from "shortid";
+
 const router = Router();
 
-router.post("/generate", auth, async (req, res) => {
+router.post("/generate", auth, async (req: Request, res: Response) => {
   try {
     const baseUrl = config.get("baseUrl");
     const { from } = req.body;
@@ -21,7 +23,7 @@ router.post("/generate", auth, async (req, res) => {
       from,
       to,
       code,
-      owner: req.user.userId,
+      owner: (<RequestWithJwtUser>req).user.userId,
     });
 
     await link.save();
@@ -33,9 +35,10 @@ router.post("/generate", auth, async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/", auth, async (req: Request, res: Response) => {
   try {
-    const links = await Link.find({ owner: req.user.userId }); // req.user is pushed by auth.middleware.js
+    const reqWithJwtUser = <RequestWithJwtUser>req;
+    const links = await Link.find({ owner: reqWithJwtUser.user.userId }); // req.user is pushed by auth.middleware.ts
     res.json(links);
   } catch (e) {
     res.status(500).json({
@@ -44,7 +47,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", auth, async (req: Request, res: Response) => {
   try {
     const link = await Link.findById(req.params.id);
     res.json(link);

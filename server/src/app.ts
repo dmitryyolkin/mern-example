@@ -1,21 +1,28 @@
-const express = require("express");
-const config = require("config");
-const mongoose = require("mongoose");
-const path = require("path");
+import express, { Request, Response, Application } from "express";
+import mongoose from "mongoose";
+import path from "path";
+import config from "config";
 
-const app = express();
+const app: Application = express();
 
 // routes
-app.use(express.json({ extended: true }));
+app.use(express.json());
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/link", require("./routes/link.routes"));
 app.use("/t", require("./routes/redirect.routes")); // process internal links having /t/ format
 
 if (process.env.NODE_ENV === "production") {
   // return static files
-  app.use("/", express.static(path.join(__dirname, "client", "build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  // path from server/build to client/build
+  const dirPrefix = "../../";
+  app.use(
+    "/",
+    express.static(path.join(__dirname, dirPrefix, "client", "build"))
+  );
+  app.get("*", (req: Request, res: Response) => {
+    res.sendFile(
+      path.resolve(__dirname, dirPrefix, "client", "build", "index.html")
+    );
   });
 }
 

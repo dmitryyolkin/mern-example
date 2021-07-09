@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* JS: The initial structure was generated with `npm create-reacta-app`
+* TS: if you want to develop with TypeScript pleae follow [instruction](https://create-react-app.dev/docs/adding-typescript/#installation)
 
 ## Available Scripts
 
